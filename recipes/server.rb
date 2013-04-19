@@ -12,8 +12,6 @@
 include_recipe "logstash::default"
 include_recipe "logrotate"
 
-include_recipe "rabbitmq" if node['logstash']['server']['install_rabbitmq']
-
 if node['logstash']['install_zeromq']
   include_recipe "yumrepo::zeromq" if platform_family?("rhel")
   node['logstash']['zeromq_packages'].each {|p| package p }
