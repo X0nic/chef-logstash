@@ -7,7 +7,7 @@ kibana_log_dir = node['logstash']['kibana']['log_dir']
 kibana_pid_dir = node['logstash']['kibana']['pid_dir']
 
 if Chef::Config[:solo]
-  es_server_ip = node['logstash']['elasticsearch_ip']
+  es_server_ip = node['logstash']['elasticsearch_ip'].empty? ? '127.0.0.1' : node['logstash']['elasticsearch_ip']
 else
   es_server_results = search(:node, "roles:#{node['logstash']['elasticsearch_role']} AND chef_environment:#{node.chef_environment}")
   unless es_server_results.empty?
